@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>D"karang Tailwind</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="assets/vendors/swiperjs/swiper-bundle.min.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!-- <link rel="stylesheet" href="assets/vendors/boxicons/css/boxicons.min.css"> -->
+</head>
+
+<body>
+    <div class="bg-gray-200">
+        <div class="h-12 md:flex justify-between max-w-6xl items-center hidden mx-auto">
+            <div x-data="{sosmedData: sosmedsData}">
+                <template x-for="sosmed in sosmedData" :key="sosmed">
+                    <a :href="`${sosmed.link}`" class="pr-3 text-gray-600 hover:text-black rounded-full">
+                        <i :class="sosmed.icon" class="text-2xl"></i>
+                    </a>
+                </template>
+            </div>
+            <div class="flex" x-data="{contact: contactsData}">
+                <template x-for="cont in contact" :key="cont">
+                    <a :href="`${cont.link}`" x-text="cont.title"
+                        class="pr-3 text-gray-600 hover:text-black rounded-full items-center"></a>
+                </template>
+            </div>
+        </div>
+    </div>
+    <!-- fixed top-0 inset-x-0 -->
+    <nav id="navbar" class="bg-gray-100 h-16 z-10 fixed top-0 inset-x-0">
+        <div class="md:mx-24 mx-4">
+            <div class="flex justify-between">
+                <div class="flex items-center space-x-1">
+                    <div class="py-5">
+                        <a href="#" class="uppercase font-bold text-gray-700">D'Karang Eco Lodge</a>
+                    </div>
+                </div>
+                <div x-data="{navData: navsData}" class="hidden md:flex items-center space-x-1">
+                    <template x-for="nav in navData" :key="nav">
+                        <a :href="`${nav.link}`" x-text='nav.title'
+                            class="py-5 px-3 text-gray-700 hover:text-black rounded"></a>
+                    </template>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-nav-btn" class="p-1 px-2 rounded hover:bg-gray-300 hover:text-black">
+                        <i class="bx bx-grid-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" x-data="{navData: navsData}"
+            class="hidden md:hidden shadow-md text-center border-t px-3 py-5 bg-gray-100 overflow-auto whitespace-nowrap">
+            <template x-for="nav in navData" :key="nav">
+                <a :href="`${nav.link}`" x-text='nav.title'
+                    class="py-5 px-3 text-gray-700 hover:text-black rounded"></a>
+            </template>
+        </div>
+    </nav>
+
+    <!-- Hero CTA header -->
+    <section class="pt-16 md:pt-0">
+        <!-- Swiper -->
+        <div class="swiper-container h-screen">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"
+                    style="background-image: url('assets/images/IMG-20210530-WA0005\ \(copy\ 1\).jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                    <h1 class="mt-40 text-center font-bold text-5xl text-indigo-700">I Miss You</h1>
+                </div>
+                <div class="swiper-slide"
+                    style="background-image: url('assets/images/IMG_20201113_122112.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                    <h1 class="mt-40 text-center font-bold text-5xl text-indigo-700">I Love You</h1>
+                </div>
+                <div class="swiper-slide"
+                    style="background-image: url('assets/images/IMG-20210530-WA0004.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                    <h1 class="mt-40 text-center font-bold text-5xl text-indigo-700">I Need You</h1>
+                </div>
+                <div class="swiper-slide"
+                    style="background-image: url('assets/images/IMG_20201115_071805.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                    <h1 class="mt-40 text-center font-bold text-5xl text-indigo-700">I Need You</h1>
+                </div>
+                <div class="swiper-slide"
+                    style="background-image: url('assets/images/IMG-20210527-WA0006.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                    <h1 class="mt-40 text-center font-bold text-5xl text-indigo-700">I Need You</h1>
+                </div>
+
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Modal Button -->
+            <div x-data="{ showModal : false }" class="relative bottom-40 z-10 text-center justify-center flex">
+                <button @click="showModal = !showModal"
+                    class="px-4 py-2 text-sm bg-white rounded-xl border transition-colors duration-150 ease-linear border-gray-200 text-gray-500 focus:outline-none focus:ring-0 font-bold hover:bg-indigo-500 hover:text-white focus:bg-indigo-50 focus:text-indigo shadow-lg">Learn
+                    more</button>
+
+                <!-- Modal Background -->
+                <div x-show="showModal"
+                    class="fixed text-gray-500 flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0"
+                    x-transition:enter="transition ease duration-300" x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100" x-transition:leave="transition ease duration-300"
+                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+                    <!-- Modal -->
+                    <div x-show="showModal" class="bg-white rounded-xl shadow-2xl p-6 sm:w-10/12 mx-10"
+                        @click.away="showModal = false" x-transition:enter="transition ease duration-100 transform"
+                        x-transition:enter-start="opacity-0 scale-90 translate-y-1"
+                        x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                        x-transition:leave="transition ease duration-100 transform"
+                        x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                        x-transition:leave-end="opacity-0 scale-90 translate-y-1">
+                        <!-- Title -->
+                        <span class="font-bold block text-2xl mb-3">Welcome!</span>
+                        <!-- Some beer 🍺 -->
+                        <div class="mb-5 bg-indigo-500 h-32 rounded-xl shadow-lg"
+                            style="background-image: url('../assets/images/IMG-20210527-WA0006.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                        </div>
+                        <p>D'Karang Eco Lodge</p>
+
+                        <!-- Buttons -->
+                        <div class="text-right space-x-5 mt-5">
+                            <button @click="showModal = !showModal"
+                                class="px-4 py-2 text-sm bg-white rounded-xl border transition-colors duration-150 ease-linear border-gray-200 text-gray-500 focus:outline-none focus:ring-0 font-bold hover:bg-gray-50 focus:bg-indigo-50 focus:text-indigo">Cancel</button>
+                            <a href="https://poinsla.xyz/" target="blank"
+                                class="px-4 py-2 text-sm bg-white rounded-xl border transition-colors duration-150 ease-linear border-gray-200 text-gray-500 focus:outline-none focus:ring-0 font-bold hover:bg-gray-50 focus:bg-indigo-50 focus:text-indigo">Book
+                                Now!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next md:bg-gray-800 py-8 px-5 rounded-lg"></div>
+            <div class="swiper-button-prev md:bg-gray-800 py-8 px-5 rounded-lg"></div>
+        </div>
+    </section>
+
+    <!-- Reservation Button -->
+    <section>
+        <a href="#">
+            <div class="bg-yellow-400 hover:bg-yellow-500 h-20 items-center flex justify-center">
+                <div>
+                    <h1 class="uppercase text-3xl font-medium text-gray-100">Reservation</h1>
+                </div>
+            </div>
+        </a>
+    </section>
+
+    <!-- Search -->
+    <section class="md:max-w-xl mx-auto px-4">
+        <div class="text-center flex border border-gray-300 rounded-full p-2 shadow my-6 px-4">
+            <input type="search" placeholder="Search..." class="w-full text-xl outline-none px-3">
+            <a href="#"><i class="bx bx-search pt-2"></i></a>
+        </div>
+    </section>
+
+    <!-- Block analitik -->
+    <div class="md:flex hidden items-center justify-center h-auto bg-gray-100">
+        <div class="bg-gray-800 container md:mx-24 mx-2 text-sm my-5 grid md:grid-cols-2 lg:grid-cols-4 text-gray-200 p-8 gap-5 rounded-lg"
+            x-data="{serviceData: servicesData}">
+            <template x-for="service in serviceData" :key="service">
+                <div class="space-y-1 text-center">
+                    <div class="text-7xl">
+                        <i :class="service.icon"></i>
+                    </div>
+                    <div class="justify-center flex">
+                        <div class="h-1 w-40 mb-3 bg-yellow-400"></div>
+                    </div>
+                    <div x-text="service.title" class="text-2xl font-medium text-white"></div>
+                    <div x-text="service.signature"></div>
+                </div>
+            </template>
+        </div>
+    </div>
+
+    <!-- Block analitik mobile -->
+    <section class="py-10">
+        <div class="flex md:hidden items-center justify-center h-auto bg-gray-800">
+            <div class="flex shadow-md text-center border-t py-5 mx-2 overflow-auto whitespace-nowrap bg-gray-800"
+                x-data="{serviceData: servicesData}">
+                <template x-for="service in serviceData" :key="service">
+                    <div class="space-y-1 text-center mx-4 my-5">
+                        <div class="text-5xl text-gray-200">
+                            <i :class="service.icon"></i>
+                        </div>
+                        <div class="justify-center flex">
+                            <div class="h-1 w-40 mb-3 bg-yellow-400"></div>
+                        </div>
+                        <div x-text="service.title" class="text-xl font-medium text-white"></div>
+                        <div x-text="service.signature" class="text-gray-200"></div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div>
+            <h1 class="text-center text-gray-800 font-semibold text-3xl uppercase pt-5">About</h1>
+            <div class="flex justify-center">
+                <p>wkwk</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Card Mobile -->
+    <section class="bg-gray-200 md:hidden">
+        <h1 class="text-center text-gray-800 font-semibold text-3xl uppercase pt-5">Rooms</h1>
+        <div class="flex shadow-md text-center border-t py-5 overflow-auto whitespace-nowrap"
+            x-data="{roomData: roomsData}">
+            <template x-for="item in roomData" :key="item">
+                <div class="relative w-64 mx-5 my-5">
+                    <div class="absolute -right-5 -bottom-5 rounded-lg bg-yellow-400 h-full w-full"></div>
+                    <div class="relative bg-gray-800 text-gray-100 rounded-lg p-8 space-y-5">
+                        <div class="h-3 w-16 mb-3 bg-yellow-400"></div>
+                        <a :href="`${item.room_image}`" target="blank">
+                            <img :src="`${item.room_image}`" alt="" class=" w-52 rounded-lg">
+                        </a>
+                        <div class="font-bold text-5xl" x-text="'$'+' '+item.room_price">$</div>
+                        <h4 x-text="item.room_name" class="font-semibold"></h4>
+                        <p class="hidden md:block" x-text="item.room_desc"></p>
+                        <a href="#" class="text-yellow-300 font-semibold block tracking-wide">Learn More <i
+                                class="bx bxs-right-arrow-alt"></i></a>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </section>
+
+    <!-- Card -->
+    <section class="hidden md:block pb-10">
+        <h1 class="text-center text-gray-800 font-semibold text-4xl uppercase pb-5">Rooms</h1>
+        <div class="justify-center md:flex" x-data="{roomData: roomsData}">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4">
+                <template x-for="item in roomData" :key="item">
+                    <div class="relative w-64 mx-5 my-5">
+                        <div class="absolute -right-5 -bottom-5 rounded-lg bg-yellow-400 h-full w-full"></div>
+                        <div class="relative bg-gray-800 text-gray-100 rounded-lg p-8 space-y-5">
+                            <div class="h-3 w-16 mb-3 bg-yellow-400"></div>
+                            <a :href="`${item.room_image}`" target="blank">
+                                <img :src="`${item.room_image}`" :alt="item.room_desc" id="roomImg"
+                                    class="w-52 rounded-lg">
+                            </a>
+                            <div class="font-bold text-3xl" x-text="'$'+' '+item.room_price">$</div>
+                            <h4 x-text="item.room_name" class="font-semibold"></h4>
+                            <p class="hidden md:block" x-text="item.room_desc"></p>
+                            <a href="#" class="text-yellow-300 font-semibold block tracking-wide">Learn More <i
+                                    class="bx bxs-right-arrow-alt"></i></a>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- x-for -->
+    <section class="flex items-center justify-center h-auto bg-gray-100 py-8">
+        <div class="container mx-2 md:mx-24" x-data="{myForData: sourceData}">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <template x-for="item in myForData" :key="item">
+                    <div
+                        class="flex items-center shadow hover:bg-indigo-100 bg-gray-200 hover:shadow-lg hover:rounded transition duration-150 ease-in-out transform hover:scale-105 p-3">
+                        <a :href="`${item.profile_image}`" target="blank">
+                            <img class="w-10 h-10 rounded-full mr-4" :src="`${item.profile_image}`" />
+                        </a>
+                        <div class="text-sm">
+                            <p class="text-gray-900 leading-none"
+                                x-text="item.employee_name + ' (' + item.employee_age + ')'"></p>
+                            <p class="text-gray-600" x-text="'Rp'+' '+item.employee_salary/100"></p>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscribe form -->
+    <div class="flex items-center justify-center h-72">
+        <div class="container mx-24 rounded shadow-lg bg-gray-800">
+            <div class="px-12 py-6">
+                <div class="text-center">
+                    <h1 class="font-normal text-2xl md:text-3xl text-gray-200 leading-loose my-3 w-full">Become a
+                        subscriber</h1>
+                    <div class="w-full text-center">
+                        <form action="#">
+                            <div class="max-w-sm mx-auto p-1 pr-0 md:flex items-center">
+                                <input type="email" placeholder="Input your email"
+                                    class="flex-1 appearance-none rounded shadow p-3 text-gray-700 mr-2 focus:outline-none">
+                                <button type="submit"
+                                    class="appearance-none bg-indigo-500 mt-3 md:mt-0 text-white text-base font-semibold tracking-wide uppercase p-3 rounded shadow hover:bg-indigo-600">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="my-12" x-data="{ width: '50' }"
+        x-init="$watch('width', value => { if (value > 100) { width = 100 } if (value == 0) { width = 10 } })">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 justify-center mx-auto md:max-w-6xl">
+            <div class="p-10 mx-5 bg-white shadow-lg rounded">
+                <h5>Alpinejs</h5>
+                <div class="bg-gray-200 rounded h-6 mt-5" role="progressbar" :aria-valuenow="width" aria-valuemin="0"
+                    aria-valuemax="100">
+                    <div class="bg-green-400 rounded h-6 text-center text-white text-sm transition"
+                        :style="`width: ${width}%; transition: width 2s;`" x-text="`${width}%`">
+                    </div>
+                </div>
+            </div>
+            <div class="p-10 mx-5 bg-white shadow-lg rounded">
+                <h5>Alpinejs</h5>
+                <div class="bg-gray-200 rounded h-6 mt-5" role="progressbar" :aria-valuenow="width" aria-valuemin="0"
+                    aria-valuemax="100">
+                    <div class="bg-green-400 rounded h-6 text-center text-white text-sm transition"
+                        :style="`width: ${width}%; transition: width 2s;`" x-text="`${width}%`">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container max-w-full mx-auto py-24 px-6">
+        <div class="font-sans">
+            <div class="max-w-sm mx-auto px-6">
+                <div class="relative flex flex-wrap">
+                    <div class="w-full relative">
+                        <div class="mt-6">
+                            <div class="text-center font-semibold text-black">If you Admin please login!</div>
+
+                            <form class="mt-8">
+                                <div class="mx-auto max-w-lg">
+                                    <div class="py-2">
+                                        <span class="px-1 text-sm text-gray-600">Username</span>
+                                        <input placeholder="Username" type="text"
+                                            class="text-md block px-3 py-2  rounded-lg w-full 
+                      bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none">
+                                    </div>
+                                    <div class="py-2" x-data="{ show: true }">
+                                        <span class="px-1 text-sm text-gray-600">Password</span>
+                                        <div class="relative">
+                                            <input placeholder="Password" :type="show ? 'password' : 'text'" class="text-md block px-3 py-2 rounded-lg w-full 
+                      bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md
+                      focus:placeholder-gray-500
+                      focus:bg-white 
+                      focus:border-gray-600  
+                      focus:outline-none">
+                                            <div
+                                                class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+
+                                                <svg class="h-6 text-gray-700" fill="none" @click="show = !show"
+                                                    :class="{'hidden': !show, 'block':show }"
+                                                    xmlns="http://www.w3.org/2000/svg" viewbox="0 0 576 512">
+                                                    <path fill="currentColor"
+                                                        d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z">
+                                                    </path>
+                                                </svg>
+
+                                                <svg class="h-6 text-gray-700" fill="none" @click="show = !show"
+                                                    :class="{'block': !show, 'hidden':show }"
+                                                    xmlns="http://www.w3.org/2000/svg" viewbox="0 0 640 512">
+                                                    <path fill="currentColor"
+                                                        d="M320 400c-75.85 0-137.25-58.71-142.9-133.11L72.2 185.82c-13.79 17.3-26.48 35.59-36.72 55.59a32.35 32.35 0 0 0 0 29.19C89.71 376.41 197.07 448 320 448c26.91 0 52.87-4 77.89-10.46L346 397.39a144.13 144.13 0 0 1-26 2.61zm313.82 58.1l-110.55-85.44a331.25 331.25 0 0 0 81.25-102.07 32.35 32.35 0 0 0 0-29.19C550.29 135.59 442.93 64 320 64a308.15 308.15 0 0 0-147.32 37.7L45.46 3.37A16 16 0 0 0 23 6.18L3.37 31.45A16 16 0 0 0 6.18 53.9l588.36 454.73a16 16 0 0 0 22.46-2.81l19.64-25.27a16 16 0 0 0-2.82-22.45zm-183.72-142l-39.3-30.38A94.75 94.75 0 0 0 416 256a94.76 94.76 0 0 0-121.31-92.21A47.65 47.65 0 0 1 304 192a46.64 46.64 0 0 1-1.54 10l-73.61-56.89A142.31 142.31 0 0 1 320 112a143.92 143.92 0 0 1 144 144c0 21.63-5.29 41.79-13.9 60.11z">
+                                                    </path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between"><label
+                                            class="block text-gray-500 font-bold my-4"><input type="checkbox"
+                                                class="leading-loose text-pink-600"> <span
+                                                class="py-2 text-sm text-gray-600 leading-snug"> Remember
+                                                Me </span></label> <label class="block text-gray-500 font-bold my-4"><a
+                                                href="#"
+                                                class="cursor-pointer tracking-tighter text-black border-b-2 border-gray-200 hover:border-gray-400"><span>Forgot
+                                                    Password?</span></a></label></div> <button class="mt-3 text-lg font-semibold 
+                      bg-gray-800 w-full text-white rounded-lg
+                      px-6 py-3 block shadow-xl hover:text-white hover:bg-black">
+                                        Login
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <section>
+        <div class="footer bg-indigo-600">
+            <div class="max-w-7xl mx-auto border-b border-gray-800">
+                <div class="flex justify-between">
+                    <div class="flex items-center space-x-1 px-8">
+                        <div class="py-5 px-2">
+                            <a href="#" class="uppercase font-bold text-gray-100">D'Karang Eco Lodge</a>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-1 mx-8">
+                        <div x-data="{sosmedData: sosmedsData}">
+                            <template x-for="sosmed in sosmedData" :key="sosmed">
+                                <a :href="`${sosmed.link}`" class="pr-3 text-gray-100 hover:text-black rounded-full">
+                                    <i :class="sosmed.icon" class="text-2xl"></i>
+                                </a>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto">
+                <div class="text-sm my-5 grid grid-cols-2 md:grid-cols-4 text-gray-200 p-8 gap-5 rounded">
+                    <div class="space-y-1 md:border-l-2 border-indigo-700 pl-2">
+                        <div class="text-3xl font-medium text-white">Company</div>
+                        <div class="block py-2 px-3 text-gray-100">D'Karang Eco Lodge</div>
+                        <div class="block py-2 px-3 text-gray-100">BBM Tours</div>
+                    </div>
+                    <div class="space-y-1 md:border-l-2 border-indigo-700 pl-4">
+                        <div class="text-3xl font-medium text-white">Service</div>
+                        <div x-data="{serviceData: servicesData}" class="items-center space-x-1">
+                            <template x-for="service in serviceData" :key="service">
+                                <p x-text='service.title' class="block py-2 px-3 text-gray-100"></p>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="space-y-1 md:border-l-2 border-indigo-700 pl-4">
+                        <div class="text-3xl font-medium text-white">Menu</div>
+                        <div x-data="{navData: navsData}" class="items-center space-x-1">
+                            <template x-for="nav in navData" :key="nav">
+                                <a href="`${nav.link}`" x-text='nav.title'
+                                    class="block py-2 px-3 text-gray-100 hover:text-black rounded"></a>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="space-y-1 md:border-l-2 border-indigo-700 pl-4">
+                        <div class="text-3xl font-medium text-white">Contact</div>
+                        <div x-data="{contact: contactsData}">
+                            <template x-for="cont in contact" :key="cont">
+                                <a :href="`${cont.link}`" x-text="cont.title"
+                                    class="block py-2 pr-3 text-gray-100 hover:text-black rounded-full items-center"></a>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="md:hidden space-y-1 md:border-l-2 border-gray-400 pl-4">
+                        <div class="text-3xl font-medium text-white">Sosmed</div>
+                        <div x-data="{sosmedData: sosmedsData}">
+                            <template x-for="sosmed in sosmedData" :key="sosmed">
+                                <a :href="`${sosmed.link}`" class="pr-3 text-gray-100 hover:text-black rounded-full">
+                                    <i :class="sosmed.icon" class="text-2xl"></i>
+                                </a>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center text-gray-100 p-8">
+                    <p>Copyright &copy; 2019 - 2021 D'Karang Eco Lodge by <a href="#">Poinsla</a> || All Right Reserved.
+                    </p>
+                    <p>Term & condition - Privacy policy</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/vendors/alpine/dist/alpine.js" defer></script>
+    <script src="assets/vendors/swiperjs/swiper-bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/dkarang_data.js"></script>
+</body>
+
+</html>
